@@ -36,6 +36,8 @@
 - (void)showPop:(GLCalendarDayCell*)cell;
 
 
+- (NSDate*)todayByTimeZone;
+
 @property (nonatomic, readonly) NSCalendar *calendar;
 @property (nonatomic, copy) NSDate *firstDate;
 @property (nonatomic, copy) NSDate *lastDate;
@@ -49,4 +51,5 @@
 - (void)forceFinishEdit;
 - (void)beginToEditRange:(GLCalendarDateRange *)range;
 - (void)scrollToDate:(NSDate *)date animated:(BOOL)animated;
+- (void)initRangUnderEdit: (GLCalendarDateRange *)range;
 @end

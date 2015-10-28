@@ -1,4 +1,4 @@
-//
+/*!
 //  CMPopTipView.m
 //
 //  Created by Chris Miles on 18/07/10.
@@ -21,7 +21,7 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-//
+*/
 
 #import "CMPopTipView.h"
 #import <QuartzCore/QuartzCore.h>
@@ -715,10 +715,10 @@
 		self.textFont = [UIFont boldSystemFontOfSize:14.0];
 		self.textColor = [UIColor whiteColor];
 		self.textAlignment = NSTextAlignmentCenter;
-		self.backgroundColor = [UIColor colorWithRed:62.0/255.0 green:60.0/255.0 blue:154.0/255.0 alpha:1.0];
-        self.has3DStyle = YES;
+		self.backgroundColor = [UIColor colorWithRed:62.0/255.0 green:60.0/255.0 blue:154.0/255.0 alpha:0.3];
+        self.has3DStyle = NO;
         self.borderColor = [UIColor blackColor];
-        self.hasShadow = YES;
+        self.hasShadow = NO;
         self.animation = CMPopTipAnimationSlide;
         self.dismissTapAnywhere = NO;
         self.preferredPointDirection = PointDirectionAny;

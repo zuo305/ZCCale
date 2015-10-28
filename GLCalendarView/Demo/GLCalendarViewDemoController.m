@@ -39,15 +39,17 @@
     
     
     
+    
+    
     [self.calendarView reload];
     
-
-    
-    
-    if (self.rangeUnderEdit.beginDate != nil)
+    if (self.rangeUnderEdit != nil)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.calendarView scrollToDate:self.rangeUnderEdit.beginDate animated:NO];
+            [self.calendarView initRangUnderEdit:self.rangeUnderEdit];
+            [self.calendarView addRange:self.rangeUnderEdit];
+            
         });
         
     }
@@ -68,30 +70,35 @@
 {
     [super viewWillAppear:YES];
     
-//    NSDate *today = [NSDate date];
+}
+
+- (NSDate*)todayFromTimeZone
+{
+    return [NSDate date];
+}
+
+- (BOOL)checkValidDay:(NSDate*)date
+{
+    unsigned int flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+    NSCalendar* calendar = [NSCalendar currentCalendar];
     
-//    NSDate *beginDate1 = [GLDateUtils dateByAddingDays:-32 toDate:today];
-//    NSDate *endDate1 = [GLDateUtils dateByAddingDays:-26 toDate:today];
-//    GLCalendarDateRange *range1 = [GLCalendarDateRange rangeWithBeginDate:beginDate1 endDate:endDate1];
-//    range1.backgroundColor = UIColorFromRGB(0x79a9cd);
-//    range1.editable = YES;
+    NSDateComponents* components = [calendar components:flags fromDate:[self todayFromTimeZone]];
+    NSDate* today = [calendar dateFromComponents:components];
     
-//    NSDate *beginDate2 = [GLDateUtils dateByAddingDays:-6 toDate:today];
-//    NSDate *endDate2 = [GLDateUtils dateByAddingDays:-3 toDate:today];
-//    GLCalendarDateRange *range2 = [GLCalendarDateRange rangeWithBeginDate:beginDate2 endDate:endDate2];
-//    range2.backgroundColor = UIColorFromRGB(0x79a9cd);
-//    range2.editable = YES;
-//
-//    self.calendarView.ranges = [@[ range2] mutableCopy];
+    components = [calendar components:flags fromDate:date];
+    NSDate* newDay = [calendar dateFromComponents:components];
     
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [self.calendarView scrollToDate:self.calendarView.lastDate animated:NO];
-//    });
+    
+    if ([today compare:newDay] == NSOrderedDescending) {
+        return NO;
+    }
+    return YES;
+    
 }
 
 - (BOOL)calenderView:(GLCalendarView *)calendarView canAddRangeWithBeginDate:(NSDate *)beginDate
 {
-    return YES;
+    return [self checkValidDay:beginDate];
 }
 
 - (GLCalendarDateRange *)calenderView:(GLCalendarView *)calendarView rangeToAddWithBeginDate:(NSDate *)beginDate
@@ -119,7 +126,7 @@
 
 - (BOOL)calenderView:(GLCalendarView *)calendarView canUpdateRange:(GLCalendarDateRange *)range toBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate
 {
-    return YES;
+    return [self checkValidDay:beginDate];
 }
 
 - (void)calenderView:(GLCalendarView *)calendarView didUpdateRange:(GLCalendarDateRange *)range toBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate

@@ -16,7 +16,7 @@
 
 @implementation GLCalendarMonthCoverView
 
-- (void)updateWithFirstDate:(NSDate *)firstDate lastDate:(NSDate *)lastDate calendar:(NSCalendar *)calendar rowHeight:(CGFloat)rowHeight
+- (void)updateWithFirstDate:(NSDate *)firstDate lastDate:(NSDate *)lastDate calendar:(NSCalendar *)calendar rowHeight:(CGFloat)rowHeight today:(NSDate*)day
 {
     if ([GLDateUtils date:firstDate isSameDayAsDate:self.firstDate] && [GLDateUtils date:lastDate isSameDayAsDate:self.lastDate]) {
         return;
@@ -29,7 +29,7 @@
     NSDateFormatter *monthFormatter = [[NSDateFormatter alloc] init];
     monthFormatter.dateFormat = @"YYYY\nMMMM";
 
-    NSDateComponents *today = [calendar components:NSCalendarUnitYear fromDate:[NSDate date]];
+    NSDateComponents *today = [calendar components:NSCalendarUnitYear fromDate:day];
     
     for (NSDate *date = [GLDateUtils monthFirstDate:firstDate]; [date compare:lastDate] < 0; date = [GLDateUtils dateByAddingMonths:1 toDate:date]) {
         NSInteger dayDiff = [GLDateUtils daysBetween:firstDate and:date];

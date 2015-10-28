@@ -10,5 +10,5 @@
 
 @interface GLCalendarMonthCoverView : UIScrollView
 @property (nonatomic, strong) NSDictionary *textAttributes;
-- (void)updateWithFirstDate:(NSDate *)firstDate lastDate:(NSDate *)lastDate calendar:(NSCalendar *)calendar rowHeight:(CGFloat)rowHeight;
+- (void)updateWithFirstDate:(NSDate *)firstDate lastDate:(NSDate *)lastDate calendar:(NSCalendar *)calendar rowHeight:(CGFloat)rowHeight today:(NSDate*)day;
 @end

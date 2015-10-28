@@ -31,12 +31,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ih-2e-aSb" userLabel="month label">
-                        <rect key="frame" x="7" y="2" width="40" height="20"/>
+                        <rect key="frame" x="-10" y="2" width="74" height="20"/>
                         <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="oig-83-yX8"/>
-                            <constraint firstAttribute="width" constant="40" id="tUx-Fs-r8t"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="8"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,6 +48,7 @@
             <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="0ih-2e-aSb" secondAttribute="trailing" constant="-10" id="4bQ-rZ-7g5"/>
                 <constraint firstAttribute="centerY" secondItem="Qzu-El-Gfs" secondAttribute="centerY" id="JcK-sM-fVt"/>
                 <constraint firstAttribute="centerX" secondItem="Qzu-El-Gfs" secondAttribute="centerX" id="TI3-mt-0qb"/>
                 <constraint firstItem="0ih-2e-aSb" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="m5X-LC-15j"/>
@@ -56,6 +56,7 @@
                 <constraint firstAttribute="bottom" secondItem="HQX-TK-Jgx" secondAttribute="bottom" id="otX-B0-VxV"/>
                 <constraint firstItem="HQX-TK-Jgx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="puQ-V0-Nr0"/>
                 <constraint firstAttribute="trailing" secondItem="HQX-TK-Jgx" secondAttribute="trailing" id="qa7-L7-lry"/>
+                <constraint firstItem="0ih-2e-aSb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="-10" id="qtI-Ao-YGr"/>
                 <constraint firstAttribute="centerX" secondItem="0ih-2e-aSb" secondAttribute="centerX" id="wae-7b-nvD"/>
             </constraints>
             <size key="customSize" width="54" height="56"/>

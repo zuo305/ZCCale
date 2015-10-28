@@ -82,10 +82,11 @@
 {
 //    NSLog(@"update ui: %@ %d", [GLDateUtils descriptionForDate:self.date], _enlargePoint);
 
-    NSDateComponents *components = [[GLDateUtils calendar] components:NSCalendarUnitDay|NSCalendarUnitMonth fromDate:self.date];
+    NSDateComponents *components = [[GLDateUtils calendar] components:NSCalendarUnitYear|NSCalendarUnitDay|NSCalendarUnitMonth fromDate:self.date];
     
     NSInteger day = components.day;
     NSInteger month = components.month;
+    NSInteger year = components.year;
 
     // month background color
     if (month % 2 == 0) {
@@ -119,14 +120,14 @@
         todayFormatter.dateStyle = NSDateFormatterMediumStyle;
         todayFormatter.timeStyle = NSDateFormatterNoStyle;
         todayFormatter.doesRelativeDateFormatting = YES;
-        [self setMonthLabelText:[todayFormatter stringFromDate:[NSDate date]]];
+        [self setMonthLabelText:[todayFormatter stringFromDate:[self.calendarView todayByTimeZone]]];
         self.dayLabel.textColor = [UIColor blackColor];
         [self setTodayLabelText:[NSString stringWithFormat:@"%ld", (long)day]];
         self.backgroundCover.isToday = NO;
 //        self.backgroundCover.fillColor = self.todayBackgroundColor;
     } else if (day == 1) {
         self.monthLabel.textColor = [UIColor redColor];
-        [self setMonthLabelText:[self monthText:month]];
+        [self setMonthLabelText:[NSString stringWithFormat:@"%@,%ld",[self monthText:month],(long)year]];
         self.dayLabel.textColor = [UIColor redColor];
         [self setDayLabelText:[NSString stringWithFormat:@"%ld", (long)day]];
         self.backgroundCover.isToday = NO;
@@ -214,12 +215,12 @@
 
 - (BOOL)isToday
 {
-    return [GLDateUtils date:self.date isSameDayAsDate:[NSDate date]];
+    return [GLDateUtils date:self.date isSameDayAsDate:[self.calendarView todayByTimeZone]];
 }
 
 - (BOOL)isFuture
 {
-    return [self.date compare:[NSDate date]] == NSOrderedDescending;
+    return [self.date compare:[self.calendarView todayByTimeZone]] == NSOrderedDescending;
 }
 
 static NSArray *months;
