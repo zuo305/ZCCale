@@ -35,7 +35,7 @@
 
     [GLCalendarView appearance].weekDayTitleAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:8], NSForegroundColorAttributeName:[UIColor grayColor]};
     [GLCalendarView appearance].monthCoverAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:30]};
-    [GLCalendarDayCell appearance].evenMonthBackgroundColor =  [UIColor clearColor];//UIColorFromRGB(0xf5f5f5);
+    [GLCalendarDayCell appearance].evenMonthBackgroundColor =  UIColorFromRGB(0xf5f5f5);
 
     [GLCalendarDayCell appearance].rangeDisplayMode = RANGE_DISPLAY_MODE_CONTINUOUS;
 
