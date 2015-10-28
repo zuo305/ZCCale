@@ -60,7 +60,7 @@
             </constraints>
             <size key="customSize" width="54" height="56"/>
             <connections>
-                <outlet property="backgroundCover" destination="HQX-TK-Jgx" id="CwL-Wf-smS"/>
+                <outlet property="backgroundCover" destination="HQX-TK-Jgx" id="CHW-Jn-XKa"/>
                 <outlet property="backgroundCoverLeft" destination="puQ-V0-Nr0" id="Rvd-Gt-Lmr"/>
                 <outlet property="backgroundCoverRight" destination="qa7-L7-lry" id="GTD-Ob-t3h"/>
                 <outlet property="dayLabel" destination="Qzu-El-Gfs" id="U7r-Ur-qvJ"/>

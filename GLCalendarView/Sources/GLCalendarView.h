@@ -32,6 +32,10 @@
 @property (nonatomic, strong) UIColor *backToTodayButtonColor UI_APPEARANCE_SELECTOR;
 @property (nonatomic, strong) UIColor *backToTodayButtonBorderColor UI_APPEARANCE_SELECTOR;
 
+
+- (void)showPop:(GLCalendarDayCell*)cell;
+
+
 @property (nonatomic, readonly) NSCalendar *calendar;
 @property (nonatomic, copy) NSDate *firstDate;
 @property (nonatomic, copy) NSDate *lastDate;

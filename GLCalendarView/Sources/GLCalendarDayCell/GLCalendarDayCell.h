@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 @class GLCalendarDateRange;
+@class CMPopTipView;
+@class GLCalendarView;
 
 typedef NS_ENUM(NSInteger, CELL_POSITION) {
     POSITION_NORMAL = 0,
@@ -44,6 +46,12 @@ typedef NS_ENUM(NSInteger, RANGE_DISPLAY_MODE) {
 
 @property (nonatomic, readonly) NSDate *date;
 @property (nonatomic, weak, readonly) GLCalendarDateRange *range;
+
+@property (nonatomic, weak) CMPopTipView *popTipView;
+@property (nonatomic, weak) GLCalendarView *calendarView;
+
+
+
 
 - (void)setDate:(NSDate *)date range:(GLCalendarDateRange *)range cellPosition:(CELL_POSITION)cellPosition enlargePoint:(ENLARGE_POINT)enlargePoint;
 @end

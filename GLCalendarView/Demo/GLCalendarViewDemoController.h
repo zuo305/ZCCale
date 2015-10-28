@@ -11,5 +11,9 @@
 @interface GLCalendarViewDemoController : UIViewController
 
 
+@property (weak,nonatomic) IBOutlet  UILabel *beginDateLabel;
+@property (weak,nonatomic) IBOutlet  UILabel *endDateLabel;
+
+
 @end
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		524FDA371BE079A20090B77C /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 524FDA361BE079A20090B77C /* CMPopTipView.m */; };
 		FA2D5F481AF0C101003D4CE7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2D5F471AF0C101003D4CE7 /* main.m */; };
 		FA2D5F4B1AF0C101003D4CE7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2D5F4A1AF0C101003D4CE7 /* AppDelegate.m */; };
 		FA2D5F621AF0C101003D4CE7 /* GLCalendarViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2D5F611AF0C101003D4CE7 /* GLCalendarViewTests.m */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		524FDA351BE079A20090B77C /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPopTipView.h; sourceTree = "<group>"; };
+		524FDA361BE079A20090B77C /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPopTipView.m; sourceTree = "<group>"; };
 		FA2D5F421AF0C101003D4CE7 /* GLCalendarView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GLCalendarView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA2D5F461AF0C101003D4CE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA2D5F471AF0C101003D4CE7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -88,6 +91,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		524FDA341BE079A20090B77C /* CMPopTipView */ = {
+			isa = PBXGroup;
+			children = (
+				524FDA351BE079A20090B77C /* CMPopTipView.h */,
+				524FDA361BE079A20090B77C /* CMPopTipView.m */,
+			);
+			path = CMPopTipView;
+			sourceTree = "<group>";
+		};
 		FA2D5F391AF0C101003D4CE7 = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +159,7 @@
 		FA2D5F6B1AF0C129003D4CE7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				524FDA341BE079A20090B77C /* CMPopTipView */,
 				FA2D5F6C1AF0C129003D4CE7 /* GLCalendarDateRange.h */,
 				FA2D5F6D1AF0C129003D4CE7 /* GLCalendarDateRange.m */,
 				FA2D5F6E1AF0C129003D4CE7 /* GLCalendarDayCell */,
@@ -305,6 +318,7 @@
 				FA2D5F891AF0C129003D4CE7 /* GLCalendarView.m in Sources */,
 				FA2D5F881AF0C129003D4CE7 /* GLCalendarMonthCoverView.m in Sources */,
 				FA2D5F841AF0C129003D4CE7 /* GLCalendarDayCell.m in Sources */,
+				524FDA371BE079A20090B77C /* CMPopTipView.m in Sources */,
 				FA2D5F861AF0C129003D4CE7 /* GLCalendarDayCellBackgroundCover.m in Sources */,
 				FA2D5F4B1AF0C101003D4CE7 /* AppDelegate.m in Sources */,
 				FA2D5F951AF0C1D2003D4CE7 /* GLCalendarViewDemoController.m in Sources */,

@@ -10,6 +10,7 @@
 #import "GLCalendarDayCell.h"
 #import "GLCalendarMonthCoverView.h"
 #import "GLDateUtils.h"
+#import "CMPopTipView.h"
 
 static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 
@@ -26,6 +27,9 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 @property (nonatomic) BOOL draggingBeginDate;
 @property (nonatomic) BOOL draggingEndDate;
 
+@property (nonatomic) CMPopTipView *popTipView;
+
+
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIView *weekDayTitle;
 @property (weak, nonatomic) IBOutlet GLCalendarMonthCoverView *monthCoverView;
@@ -33,10 +37,15 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 @property (weak, nonatomic) IBOutlet UIImageView *maginifierContentView;
 @end
 
+
 @implementation GLCalendarView
+{
+    BOOL drawPop;
+}
 
 @synthesize firstDate = _firstDate;
 @synthesize lastDate = _lastDate;
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -62,6 +71,9 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     view.frame = self.bounds;
     view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     [self addSubview:view];
+    self.popTipView = [[CMPopTipView alloc] initWithMessage:@""];
+    self.popTipView.backgroundColor = [UIColor darkGrayColor];
+
     [self setup];
 }
 
@@ -112,7 +124,7 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     if ([self.delegate respondsToSelector:@selector(weekDayTitlesForCalendarView:)]) {
         titles = [self.delegate weekDayTitlesForCalendarView:self];
     } else {
-        titles = self.calendar.veryShortStandaloneWeekdaySymbols;
+        titles = self.calendar.shortStandaloneWeekdaySymbols;
     }
     NSInteger firstWeekDayIdx = [self.calendar firstWeekday] - 1;  // Sunday == 1
     if (firstWeekDayIdx > 0) {
@@ -247,9 +259,19 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     } else {
         enlargePoint = ENLARGE_NONE;
     }
+    cell.calendarView = self;
+    cell.popTipView = self.popTipView;
     [cell setDate:date range:[self selectedRangeForDate:date] cellPosition:cellPosition enlargePoint:enlargePoint];
     
     return cell;
+}
+
+- (void)showPop:(GLCalendarDayCell*)cell
+{
+    if( drawPop == true && cell.superview != nil )
+    {
+        [self showCorrentDatePop:self.rangeUnderEdit.beginDate :self.rangeUnderEdit.endDate :cell];
+    }
 }
 
 - (NSDate *)dateForCellAtIndexPath:(NSIndexPath *)indexPath
@@ -268,6 +290,22 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 }
 
 
+- (void)showCorrentDatePop:(NSDate*)begindate :(NSDate*)enddate :(UICollectionViewCell*)cell
+{
+    
+    if (cell.superview != nil)
+    {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy/MM/dd"];
+        NSString *stringBegin = [formatter stringFromDate:begindate];
+        NSString *stringEnd = [formatter stringFromDate:enddate];
+        NSString *message = [NSString stringWithFormat:@"Arrival:%@-Depature:%@ (Drag point to change the date)",stringBegin,stringEnd];
+        [self.popTipView setMessage:message];
+        [self.popTipView presentPointingAtView:cell inView:cell.superview animated:YES];
+        
+    }
+    
+}
 
 # pragma mark - UICollectionView delegate
 
@@ -276,6 +314,8 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     NSDate *date = [self dateForCellAtIndexPath:indexPath];
     GLCalendarDateRange *range = [self selectedRangeForDate:date];
     
+
+
     // if click in a range
     if (range && range.editable) {
         if (range == self.rangeUnderEdit) {
@@ -287,6 +327,12 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
         }
         [self beginToEditRange:range];
     } else {
+        UICollectionViewCell *dateCell =[self.collectionView cellForItemAtIndexPath:indexPath];
+        int daysToAdd = 1;
+        NSDate *newDate1 = [date dateByAddingTimeInterval:60*60*24*daysToAdd];
+        [self showCorrentDatePop:date :newDate1 :dateCell];
+        
+        
         if (self.rangeUnderEdit) {
             [self removeRange:self.rangeUnderEdit];
             BOOL canAdd = [self.delegate calenderView:self canAddRangeWithBeginDate:date];
@@ -373,6 +419,8 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     self.rangeUnderEdit.inEdit = YES;
     [self reloadFromBeginDate:self.rangeUnderEdit.beginDate toDate:self.rangeUnderEdit.endDate];
     [self.delegate calenderView:self beginToEditRange:range];
+    
+    
 }
 
 - (void)finishEditRange:(GLCalendarDateRange *)range continueEditing:(BOOL)continueEditing
@@ -407,16 +455,28 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     return NO;
 }
 
+- (void)setPopShowState:(BOOL)show
+{
+    drawPop = show;
+    if(drawPop == false)
+    {
+        [self.popTipView dismissAnimated:false];
+    }
+}
+
 
 - (void)handleDragBeginDate:(UIPanGestureRecognizer *)recognizer
 {
     if (recognizer.state == UIGestureRecognizerStateBegan) {
+        [self setPopShowState:false];
+
         self.draggingBeginDate = YES;
         [self reloadCellOnDate:self.rangeUnderEdit.beginDate];
         [self showMagnifierAboveDate:self.rangeUnderEdit.beginDate];
         return;
     }
     if (recognizer.state == UIGestureRecognizerStateEnded) {
+        drawPop = true;
         self.draggingBeginDate = NO;
         [self hideMagnifier];
         [self reloadCellOnDate:self.rangeUnderEdit.beginDate];
@@ -454,15 +514,20 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     }
 }
 
+
+
 - (void)handleDragEndDate:(UIPanGestureRecognizer *)recognizer
 {
     if (recognizer.state == UIGestureRecognizerStateBegan) {
+        [self setPopShowState:false];
         self.draggingEndDate = YES;
         [self reloadCellOnDate:self.rangeUnderEdit.endDate];
         [self showMagnifierAboveDate:self.rangeUnderEdit.endDate];
         return;
     }
     if (recognizer.state == UIGestureRecognizerStateEnded) {
+        [self setPopShowState:true];
+
         self.draggingEndDate = NO;
         [self hideMagnifier];
         [self reloadCellOnDate:self.rangeUnderEdit.endDate];
