@@ -78,7 +78,7 @@ static NSString *timezoneAbbreviation = @"";
     timezoneAbbreviation = timezoneAbb;
     NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
     NSCalendar *cal = [threadDictionary objectForKey:@"GLCalendar"];
-    if (!cal)
+    if (cal)
     {
         [threadDictionary removeObjectForKey:@"GLCalendar"];
     }
