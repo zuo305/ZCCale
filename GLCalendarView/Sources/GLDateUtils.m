@@ -73,9 +73,17 @@ static NSString *timezoneAbbreviation = @"";
     return NO;
 }
 
-+ (void)setTimeZoneAbbreviation:(NSString*)timezoneAbb
++ (void)changeTimeZoneAbbreviation:(NSString*)timezoneAbb
 {
     timezoneAbbreviation = timezoneAbb;
+    NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
+    NSCalendar *cal = [threadDictionary objectForKey:@"GLCalendar"];
+    if (!cal)
+    {
+        [threadDictionary removeObjectForKey:@"GLCalendar"];
+    }
+    [self calendar];
+    
 }
 
 + (NSCalendar *)calendar {

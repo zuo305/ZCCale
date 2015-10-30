@@ -28,18 +28,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    [GLDateUtils setTimeZoneAbbreviation:@"EDT"];
 }
 
 - (void)showCalendarView
 {
+    [GLDateUtils changeTimeZoneAbbreviation:@"PDT"];
     self.calendarView = [[GLCalendarView alloc] initWithFrame:CGRectMake(0, 100, self.view.bounds.size.width , self.view.bounds.size.height - 100)];
     [self.view addSubview:self.calendarView];
     self.calendarView.delegate = self;
     self.calendarView.showMagnifier = YES;
     
-    
-    
+
     
     [self.calendarView reload];
     

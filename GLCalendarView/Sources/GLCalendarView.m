@@ -302,7 +302,7 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
         [formatter setDateFormat:@"yyyy/MM/dd"];
         NSString *stringBegin = [formatter stringFromDate:begindate];
         NSString *stringEnd = [formatter stringFromDate:enddate];
-        NSString *message = [NSString stringWithFormat:@"Arrival:%@-Depature:%@ (Drag point to change the date)",stringBegin,stringEnd];
+        NSString *message = [NSString stringWithFormat:@"%@ - %@ (Drag point to change the date)",stringBegin,stringEnd];
         [self.popTipView setMessage:message];
         [self.popTipView presentPointingAtView:cell inView:cell.superview animated:YES];
         
