@@ -28,6 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [GLDateUtils setTimeZoneAbbreviation:@"EDT"];
 }
 
 - (void)showCalendarView
@@ -36,7 +37,6 @@
     [self.view addSubview:self.calendarView];
     self.calendarView.delegate = self;
     self.calendarView.showMagnifier = YES;
-    
     
     
     
@@ -72,28 +72,14 @@
     
 }
 
-- (NSDate*)todayFromTimeZone
-{
-    return [NSDate date];
-}
 
 - (BOOL)checkValidDay:(NSDate*)date
 {
-    unsigned int flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    
-    NSDateComponents* components = [calendar components:flags fromDate:[self todayFromTimeZone]];
-    NSDate* today = [calendar dateFromComponents:components];
-    
-    components = [calendar components:flags fromDate:date];
-    NSDate* newDay = [calendar dateFromComponents:components];
-    
-    
-    if ([today compare:newDay] == NSOrderedDescending) {
+    if ([GLDateUtils date:date isEarlyDate:[self.calendarView todayDate]])
+    {
         return NO;
     }
-    return YES;
-    
+    return  YES;
 }
 
 - (BOOL)calenderView:(GLCalendarView *)calendarView canAddRangeWithBeginDate:(NSDate *)beginDate
@@ -145,9 +131,6 @@
     self.endDateLabel.text = stringEnd;
     [self hideCalendarView];
     
-//    if (self.rangeUnderEdit) {
-//        [self.calendarView removeRange:self.rangeUnderEdit];
-//    }
 }
 
 @end

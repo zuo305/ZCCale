@@ -13,6 +13,8 @@
 
 @implementation GLDateUtils
 
+static NSString *timezoneAbbreviation = @"";
+
 + (BOOL)date:(NSDate *)date1 isSameDayAsDate:(NSDate *)date2 {
     if (date1 == nil || date2 == nil) {
         return NO;
@@ -27,12 +29,66 @@
             [day2 year] == [day1 year]);
 }
 
++ (BOOL)date:(NSDate*)date1 isEarlyDate:(NSDate*)date2{
+    if (date1 == nil || date2 == nil) {
+        return NO;
+    }
+    
+    NSCalendar *calendar = [GLDateUtils calendar];
+    
+    NSDateComponents *day1 = [calendar components:CALENDAR_COMPONENTS fromDate:date1];
+    NSDateComponents *day2 = [calendar components:CALENDAR_COMPONENTS fromDate:date2];
+    
+    
+    if ([day1 year] < [day2 year] )
+    {
+        return YES;
+    }
+    else if ([day1 year] == [day2 year])
+    {
+        if([day1 month] < [day2 month])
+        {
+            return YES;
+        }
+        else if([day1 month] == [day2 month])
+        {
+            if([day1 day] < [day2 day])
+            {
+                return YES;
+            }
+            else
+            {
+                return NO;
+            }
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    else
+    {
+        return NO;
+    }
+    return NO;
+}
+
++ (void)setTimeZoneAbbreviation:(NSString*)timezoneAbb
+{
+    timezoneAbbreviation = timezoneAbb;
+}
+
 + (NSCalendar *)calendar {
     NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
     NSCalendar *cal = [threadDictionary objectForKey:@"GLCalendar"];
     if (!cal) {
         cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         cal.locale = [NSLocale currentLocale];
+        NSTimeZone *timezone = [NSTimeZone timeZoneWithAbbreviation:timezoneAbbreviation];
+        if (timezone != nil)
+        {
+            cal.timeZone = timezone;
+        }
         [threadDictionary setObject:cal forKey:@"GLCalendar"];
     }
     return cal;

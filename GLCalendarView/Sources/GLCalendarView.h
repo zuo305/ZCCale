@@ -36,7 +36,7 @@
 - (void)showPop:(GLCalendarDayCell*)cell;
 
 
-- (NSDate*)todayByTimeZone;
+- (NSDate*)todayDate;
 
 @property (nonatomic, readonly) NSCalendar *calendar;
 @property (nonatomic, copy) NSDate *firstDate;

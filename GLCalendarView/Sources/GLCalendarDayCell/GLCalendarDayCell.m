@@ -120,7 +120,7 @@
         todayFormatter.dateStyle = NSDateFormatterMediumStyle;
         todayFormatter.timeStyle = NSDateFormatterNoStyle;
         todayFormatter.doesRelativeDateFormatting = YES;
-        [self setMonthLabelText:[todayFormatter stringFromDate:[self.calendarView todayByTimeZone]]];
+        [self setMonthLabelText:[todayFormatter stringFromDate:[self.calendarView todayDate]]];
         self.dayLabel.textColor = [UIColor blackColor];
         [self setTodayLabelText:[NSString stringWithFormat:@"%ld", (long)day]];
         self.backgroundCover.isToday = NO;
@@ -215,12 +215,12 @@
 
 - (BOOL)isToday
 {
-    return [GLDateUtils date:self.date isSameDayAsDate:[self.calendarView todayByTimeZone]];
+    return [GLDateUtils date:self.date isSameDayAsDate:[self.calendarView todayDate]];
 }
 
 - (BOOL)isFuture
 {
-    return [self.date compare:[self.calendarView todayByTimeZone]] == NSOrderedDescending;
+    return [self.date compare:[self.calendarView todayDate]] == NSOrderedDescending;
 }
 
 static NSArray *months;

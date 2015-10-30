@@ -160,7 +160,7 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 
 - (void)reload
 {
-    [self.monthCoverView updateWithFirstDate:self.firstDate lastDate:self.lastDate calendar:self.calendar rowHeight:self.rowHeight today:[self todayByTimeZone]];
+    [self.monthCoverView updateWithFirstDate:self.firstDate lastDate:self.lastDate calendar:self.calendar rowHeight:self.rowHeight today:[self todayDate]];
     [self.collectionView reloadData];
 }
 
@@ -208,7 +208,7 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 - (NSDate *)firstDate
 {
     if (!_firstDate) {
-        self.firstDate = [GLDateUtils dateByAddingDays:-31 toDate:[self todayByTimeZone]];
+        self.firstDate = [GLDateUtils dateByAddingDays:-31 toDate:[self todayDate]];
     }
     return _firstDate;
 }
@@ -221,7 +221,7 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 - (NSDate *)lastDate
 {
     if (!_lastDate) {
-        self.lastDate = [GLDateUtils dateByAddingDays:+365 toDate:[self todayByTimeZone]];
+        self.lastDate = [GLDateUtils dateByAddingDays:+365 toDate:[self todayDate]];
     }
     return _lastDate;
 }
@@ -333,10 +333,10 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
         
         
         if (self.rangeUnderEdit) {
-            [self removeRange:self.rangeUnderEdit];
-            [self.popTipView dismissAnimated:false];
             BOOL canAdd = [self.delegate calenderView:self canAddRangeWithBeginDate:date];
             if (canAdd) {
+                [self removeRange:self.rangeUnderEdit];
+                [self.popTipView dismissAnimated:false];
                 UICollectionViewCell *dateCell =[self.collectionView cellForItemAtIndexPath:indexPath];
                 int daysToAdd = 1;
                 NSDate *newDate1 = [date dateByAddingTimeInterval:60*60*24*daysToAdd];
@@ -616,12 +616,12 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 
 - (IBAction)backToTodayButtonPressed:(id)sender
 {
-    [self scrollToDate:[self todayByTimeZone] animated:YES];
+    [self scrollToDate:[self todayDate] animated:YES];
 }
 # pragma mark - helper
 
 
-- (NSDate*)todayByTimeZone
+- (NSDate*)todayDate
 {
     return [NSDate date];
 }
@@ -630,7 +630,7 @@ static NSDate *today;
 - (NSDate *)today
 {
     if (!today) {
-        today = [GLDateUtils cutDate:[self todayByTimeZone]];
+        today = [GLDateUtils cutDate:[self todayDate]];
     }
     return today;
 }
