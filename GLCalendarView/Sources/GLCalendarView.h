@@ -18,7 +18,7 @@
 - (void)calenderView:(GLCalendarView *)calendarView finishEditRange:(GLCalendarDateRange *)range continueEditing:(BOOL)continueEditing;
 - (BOOL)calenderView:(GLCalendarView *)calendarView canUpdateRange:(GLCalendarDateRange *)range toBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate;
 - (void)calenderView:(GLCalendarView *)calendarView didUpdateRange:(GLCalendarDateRange *)range toBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate;
-- (NSString*)calenderView:(GLCalendarView *)calendarView TiShowByBeginDate:(NSDate*)begindate endDate:(NSDate*)enddate;
+- (NSString*)calenderView:(GLCalendarView *)calendarView tipShowByBeginDate:(NSDate*)begindate endDate:(NSDate*)enddate;
 
 @optional
 - (NSArray *)weekDayTitlesForCalendarView:(GLCalendarView *)calendarView;

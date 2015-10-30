@@ -298,7 +298,7 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     
     if (cell.superview != nil)
     {
-        NSString *message = [self.delegate calenderView:self TiShowByBeginDate:begindate endDate:enddate];
+        NSString *message = [self.delegate calenderView:self tipShowByBeginDate:begindate endDate:enddate];
         [self.popTipView setMessage:message];
         [self.popTipView presentPointingAtView:cell inView:cell.superview animated:YES];
     }

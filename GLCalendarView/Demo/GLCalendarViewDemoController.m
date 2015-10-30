@@ -87,7 +87,7 @@
 }
 
 
-- (NSString*)calenderView:(GLCalendarView *)calendarView TiShowByBeginDate:(NSDate*)begindate endDate:(NSDate*)enddate
+- (NSString*)calenderView:(GLCalendarView *)calendarView tipShowByBeginDate:(NSDate*)begindate endDate:(NSDate*)enddate
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd"];
