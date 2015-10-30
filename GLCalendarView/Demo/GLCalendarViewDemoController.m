@@ -86,6 +86,18 @@
     return [self checkValidDay:beginDate];
 }
 
+
+- (NSString*)calenderView:(GLCalendarView *)calendarView TiShowByBeginDate:(NSDate*)begindate endDate:(NSDate*)enddate
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy/MM/dd"];
+    NSString *stringBegin = [formatter stringFromDate:begindate];
+    NSString *stringEnd = [formatter stringFromDate:enddate];
+    NSString *message = [NSString stringWithFormat:@"%@ - %@ (Drag point to change the date)",stringBegin,stringEnd];
+
+    return message;
+}
+
 - (GLCalendarDateRange *)calenderView:(GLCalendarView *)calendarView rangeToAddWithBeginDate:(NSDate *)beginDate
 {
     NSDate* endDate = [GLDateUtils dateByAddingDays:1 toDate:beginDate];

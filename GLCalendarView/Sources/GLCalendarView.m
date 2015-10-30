@@ -298,16 +298,10 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     
     if (cell.superview != nil)
     {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy/MM/dd"];
-        NSString *stringBegin = [formatter stringFromDate:begindate];
-        NSString *stringEnd = [formatter stringFromDate:enddate];
-        NSString *message = [NSString stringWithFormat:@"%@ - %@ (Drag point to change the date)",stringBegin,stringEnd];
+        NSString *message = [self.delegate calenderView:self TiShowByBeginDate:begindate endDate:enddate];
         [self.popTipView setMessage:message];
         [self.popTipView presentPointingAtView:cell inView:cell.superview animated:YES];
-        
     }
-    
 }
 
 # pragma mark - UICollectionView delegate
