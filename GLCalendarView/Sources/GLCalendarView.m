@@ -208,7 +208,7 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 - (NSDate *)firstDate
 {
     if (!_firstDate) {
-        self.firstDate = [GLDateUtils dateByAddingDays:-31 toDate:[self todayDate]];
+        self.firstDate = [GLDateUtils dateByAddingDays:-7 toDate:[self todayDate]];
     }
     return _firstDate;
 }
