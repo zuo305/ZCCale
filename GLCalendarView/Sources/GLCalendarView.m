@@ -240,6 +240,10 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(indexPath.row >=  [GLDateUtils daysBetween:self.firstDate and:self.lastDate] + 1)
+        return nil;
+
+    
     GLCalendarDayCell *cell = (GLCalendarDayCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
     
     CELL_POSITION cellPosition;
