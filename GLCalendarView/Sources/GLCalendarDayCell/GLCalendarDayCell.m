@@ -127,7 +127,7 @@
 //        self.backgroundCover.fillColor = self.todayBackgroundColor;
     } else if (day == 1) {
         self.monthLabel.textColor = [UIColor redColor];
-        [self setMonthLabelText:[NSString stringWithFormat:@"%@,%ld",[self monthText:month],(long)year]];
+        [self setMonthLabelText:[NSString stringWithFormat:@"%@ %ld",[self monthText:month],(long)year]];
         self.dayLabel.textColor = [UIColor redColor];
         [self setDayLabelText:[NSString stringWithFormat:@"%ld", (long)day]];
         self.backgroundCover.isToday = NO;
