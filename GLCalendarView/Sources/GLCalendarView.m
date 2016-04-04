@@ -88,7 +88,6 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     self.calendar = [GLDateUtils calendar];
     
     self.monthCoverView.hidden = YES;
-    self.monthCoverView.languageCode = self.languageCode;
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerNib:[UINib nibWithNibName:@"GLCalendarDayCell" bundle:[NSBundle bundleForClass:self.class]] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
@@ -119,6 +118,7 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 
 - (void)setupWeekDayTitle
 {
+
     [self.weekDayTitle.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     CGFloat width = (CGRectGetWidth(self.bounds) - self.padding * 2) / 7;
     CGFloat centerY = self.weekDayTitle.bounds.size.height / 2;
@@ -160,6 +160,7 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 
 - (void)reload
 {
+    self.monthCoverView.languageCode = self.languageCode;
     [self.monthCoverView updateWithFirstDate:self.firstDate lastDate:self.lastDate calendar:self.calendar rowHeight:self.rowHeight today:[self todayDate]];
     [self.collectionView reloadData];
 }
