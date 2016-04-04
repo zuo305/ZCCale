@@ -35,6 +35,7 @@
     [GLDateUtils changeTimeZoneAbbreviation:@"PDT"];
     self.calendarView = [[GLCalendarView alloc] initWithFrame:CGRectMake(0, 100, self.view.bounds.size.width , self.view.bounds.size.height - 100)];
     [self.view addSubview:self.calendarView];
+    self.calendarView.languageCode = @"zh";
     self.calendarView.delegate = self;
     self.calendarView.showMagnifier = YES;
     

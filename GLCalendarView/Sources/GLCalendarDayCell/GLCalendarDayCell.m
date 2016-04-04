@@ -117,6 +117,7 @@
     if ([self isToday]) {
         self.monthLabel.textColor = [UIColor blackColor];
         NSDateFormatter *todayFormatter = [[NSDateFormatter alloc] init];
+        todayFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier: self.calendarView.languageCode];
         todayFormatter.dateStyle = NSDateFormatterMediumStyle;
         todayFormatter.timeStyle = NSDateFormatterNoStyle;
         todayFormatter.doesRelativeDateFormatting = YES;
@@ -226,7 +227,9 @@
 static NSArray *months;
 - (NSString *)monthText:(NSInteger)month {
     if (!months) {
-        months = [[[[NSDateFormatter alloc] init] shortStandaloneMonthSymbols] valueForKeyPath:@"capitalizedString"];
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        format.locale = [[NSLocale alloc] initWithLocaleIdentifier: self.calendarView.languageCode];
+        months = [[format shortStandaloneMonthSymbols] valueForKeyPath:@"capitalizedString"];
     }
     return [months objectAtIndex:(month - 1)];
 }

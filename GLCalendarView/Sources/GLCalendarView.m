@@ -46,7 +46,6 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
 @synthesize firstDate = _firstDate;
 @synthesize lastDate = _lastDate;
 
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -89,7 +88,7 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     self.calendar = [GLDateUtils calendar];
     
     self.monthCoverView.hidden = YES;
-
+    self.monthCoverView.languageCode = self.languageCode;
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerNib:[UINib nibWithNibName:@"GLCalendarDayCell" bundle:[NSBundle bundleForClass:self.class]] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
@@ -127,6 +126,7 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     if ([self.delegate respondsToSelector:@selector(weekDayTitlesForCalendarView:)]) {
         titles = [self.delegate weekDayTitlesForCalendarView:self];
     } else {
+        self.calendar.locale = [[NSLocale alloc] initWithLocaleIdentifier:self.languageCode];
         titles = self.calendar.shortStandaloneWeekdaySymbols;
     }
     NSInteger firstWeekDayIdx = [self.calendar firstWeekday] - 1;  // Sunday == 1
