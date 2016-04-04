@@ -32,6 +32,9 @@
 @end
 
 @implementation GLCalendarDayCell
+{
+    NSArray *months;
+}
 
 - (void)awakeFromNib
 {
@@ -224,7 +227,6 @@
     return [self.date compare:[self.calendarView todayDate]] == NSOrderedDescending;
 }
 
-static NSArray *months;
 - (NSString *)monthText:(NSInteger)month {
     if (!months) {
         NSDateFormatter *format = [[NSDateFormatter alloc] init];
