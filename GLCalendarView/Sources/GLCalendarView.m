@@ -90,7 +90,9 @@ static NSString * const CELL_REUSE_IDENTIFIER = @"DayCell";
     self.monthCoverView.hidden = YES;
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    [self.collectionView registerNib:[UINib nibWithNibName:@"GLCalendarDayCell" bundle:[NSBundle bundleForClass:self.class]] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
+//    [self.collectionView registerNib:[UINib nibWithNibName:@"GLCalendarDayCell" bundle:[NSBundle bundleForClass:self.class]] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
+    
+    [self.collectionView registerClass:[GLCalendarDayCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
     
     self.dragBeginDateGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleDragBeginDate:)];
     self.dragEndDateGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleDragEndDate:)];

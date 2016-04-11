@@ -19,11 +19,9 @@
 
 
 @interface GLCalendarDayCell()
-@property (weak, nonatomic) IBOutlet UILabel *dayLabel;
-@property (weak, nonatomic) IBOutlet UILabel *monthLabel;
-@property (weak, nonatomic) IBOutlet GLCalendarDayCellBackgroundCover *backgroundCover;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *backgroundCoverLeft;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *backgroundCoverRight;
+@property (strong, nonatomic)  UILabel *dayLabel;
+@property (strong, nonatomic)  UILabel *monthLabel;
+@property (strong, nonatomic)  GLCalendarDayCellBackgroundCover *backgroundCover;
 
 @property (nonatomic) CELL_POSITION position;
 @property (nonatomic) ENLARGE_POINT enlargePoint;
@@ -36,10 +34,30 @@
     NSArray *months;
 }
 
-- (void)awakeFromNib
+//- (void)awakeFromNib
+//{
+//    [super awakeFromNib];
+//}
+
+- (id)initWithFrame:(CGRect)frame
 {
-    [super awakeFromNib];
-    [self reloadAppearance];
+    self = [super initWithFrame:frame];
+    if (self) {
+        _backgroundCover = [[GLCalendarDayCellBackgroundCover alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        _backgroundCover.backgroundColor = [UIColor whiteColor];
+        [self.contentView addSubview:_backgroundCover];
+        _dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        _dayLabel.textAlignment = NSTextAlignmentCenter;
+        _dayLabel.textColor = [UIColor blackColor];
+        [self.contentView addSubview:_dayLabel];
+        
+        
+        _monthLabel = [[UILabel alloc] initWithFrame:CGRectMake(-2, 0, frame.size.width + 4, 22)];
+        _monthLabel.textAlignment = NSTextAlignmentCenter;
+        [self.contentView addSubview:_monthLabel];
+        [self reloadAppearance];
+    }
+    return self;
 }
 
 - (void)reloadAppearance
@@ -100,18 +118,12 @@
     
     // adjust background position
     if (self.position == POSITION_LEFT_EDGE) {
-        self.backgroundCoverRight.constant = 0;
-        self.backgroundCoverLeft.constant = -self.containerPadding;
         self.backgroundCover.paddingLeft = self.containerPadding;
         self.backgroundCover.paddingRight = 0;
     } else if (self.position == POSITION_RIGHT_EDGE){
-        self.backgroundCoverRight.constant = -self.containerPadding;
-        self.backgroundCoverLeft.constant = 0;
         self.backgroundCover.paddingLeft = 0;
         self.backgroundCover.paddingRight = self.containerPadding;
     } else {
-        self.backgroundCoverRight.constant = 0;
-        self.backgroundCoverLeft.constant = 0;
         self.backgroundCover.paddingLeft = 0;
         self.backgroundCover.paddingRight = 0;
     }
