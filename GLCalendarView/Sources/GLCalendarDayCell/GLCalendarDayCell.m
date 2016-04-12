@@ -43,7 +43,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _backgroundCover = [[GLCalendarDayCellBackgroundCover alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        _backgroundCover = [[GLCalendarDayCellBackgroundCover alloc] initWithFrame:CGRectMake(0, 0, (int)(frame.size.width + 0.5), frame.size.height)];
         _backgroundCover.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:_backgroundCover];
         _dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
