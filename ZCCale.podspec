@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "ZCCale"
-  s.version      = "2.1.0"
+  s.version      = "2.1.1"
   s.summary      = "customizable date range picker"
   s.description  = <<-DESC
                     Fully customizable date range picker
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.license      = 'MIT'
   s.author       = { "zuo305" => "johnzuo305@gmail.com" }
   s.social_media_url = "https://twitter.com/johnzuo305"
-  s.source       = { :git => "https://github.com/zuo305/ZCCale.git", :tag => '2.1.0' }
+  s.source       = { :git => "https://github.com/zuo305/ZCCale.git", :tag => '2.1.1' }
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
